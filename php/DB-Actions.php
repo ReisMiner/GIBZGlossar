@@ -1,6 +1,6 @@
 <?php
-include __dir__."config.php";
-
+include "config.php";
+session_start();
 $word = "";
 $explanation = "";
 
@@ -14,7 +14,9 @@ if (isset($_POST['word']) and isset($_POST['explanation'])) {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $query = "INSERT INTO glossar(word, explaination, discord_name, discord_id, added_at) VALUES ('$word','$explanation','69','69',now())";
+    $dc_user = $_SESSION["username"];
+    $dc_id = $_SESSION['user_id'];
+    $query = "INSERT INTO glossar(word, explanation, discord_name, discord_id, added_at) VALUES ('$word','$explanation','$dc_user','$dc_id',now())";
     if ($conn->query($query) === TRUE) {
         echo json_encode(array("gud" => "yes"));
     }

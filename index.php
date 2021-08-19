@@ -7,10 +7,7 @@ include "php/discord.php";
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta property="og:title" content="GIBZ Glossar"/>
-    <meta property="og:url" content="https://neger.store"/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:description" content="random russian fuck"/>
+    <?php generateMeta(); ?>
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -20,12 +17,11 @@ include "php/discord.php";
     <title>Glossar</title>
 </head>
 <body class="blue-grey darken-4">
-
 <?php
-$auth_url = url($client_id, $redirect_url, $scopes);
 if (isset($_SESSION['user']) && !isset($_SESSION['user']['message'])) {
     echo '
 <div class="row" id="mainRow">
+    ';showCards();echo '
 </div>
 
 <div class="fixed-action-btn">
@@ -53,7 +49,7 @@ if (isset($_SESSION['user']) && !isset($_SESSION['user']['message'])) {
                 <div class="row">
                     <div class="input-field col s12">
                         <input id="explanation" type="text" class="validate" data-length="200">
-                        <label for="explanation">Author | max 200 Characters</label>
+                        <label for="explanation">Explanation | max 200 Characters</label>
                     </div>
                 </div>
             </form>
@@ -84,7 +80,7 @@ if (isset($_SESSION['user']) && !isset($_SESSION['user']['message'])) {
                     </div>
                     <div class="input-field col s12">
                         <input id="searchID" type="number" class="validate">
-                        <label for="searchID">ID</label>
+                        <label for="searchID">ID | if filled out it only searches for the ID</label>
                     </div>
                     <form action="#" >
                         <h5>Order by: </h5>
@@ -114,7 +110,7 @@ if (isset($_SESSION['user']) && !isset($_SESSION['user']['message'])) {
                         </p>
                         <p>
                             <label>
-                                <input class="with-gap" name="sortGroup" type="radio" value="discordUser" />
+                                <input class="with-gap" name="sortGroup" type="radio" value="discord_name" />
                                 <span>Discord User</span>
                             </label>
                         </p>
@@ -144,7 +140,8 @@ if (isset($_SESSION['user']) && !isset($_SESSION['user']['message'])) {
 ?>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
 <script type="text/javascript" src="main.js"></script>
 </body>
 </html>

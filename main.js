@@ -31,7 +31,7 @@ $(document).ready(function () {
         let keyPressed = event.keyCode || event.which;
         if (keyPressed === 13) {
             event.preventDefault();
-            //applyFilter();
+            applyFilter();
             return false;
         }
     });
@@ -52,18 +52,18 @@ function addWordToDB() {
         let explanation = document.getElementById("explanation");
 
         $.ajax({
-            url: "php/DB-Actions.php",
+            url: "/php/DB-Actions.php",
             type: "post",
             dataType: 'json',
-            data: {word: word.value, author: explanation.value},
+            data: {word: word.value, explanation: explanation.value},
             success: function () {
-                word.value = "";
                 explanation.value = "";
+                word.value = "";
                 location.reload();
             }
         });
     } else {
-
+        alert("fsdf");
     }
 }
 
@@ -77,7 +77,7 @@ function checkFormInput() {
 function applyFilter() {
     let urlString = "";
     if (document.getElementById("searchID").value !== "") {
-        urlString += location.protocol + '//' + location.host + location.pathname + "?ID=" + document.getElementById("searchID").value;
+        urlString += location.protocol + '//' + location.host + location.pathname + "?id=" + document.getElementById("searchID").value;
     } else {
         urlString += location.protocol + '//' + location.host + location.pathname + "?word=" + document.getElementById("searchWord").value;
         urlString += "&explanation=" + document.getElementById("searchExplanation").value;
@@ -93,7 +93,7 @@ function applyFilter() {
 
 function copy(text) {
     let input = document.createElement('textarea');
-    input.innerHTML = location.protocol + '//' + location.host + location.pathname + "?ID=" + text;
+    input.innerHTML = location.protocol + '//' + location.host + location.pathname + "?id=" + text;
     document.body.appendChild(input);
     input.select();
     let result = document.execCommand('copy');
