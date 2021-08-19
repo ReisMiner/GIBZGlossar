@@ -1,4 +1,12 @@
 *{
     margin: 0;
     padding: 0;
+    color: #eceff1;
+}
+body{
+}
+#discord-login{
+}
+#discord-login a {
+    background-color: #7289da;
 }

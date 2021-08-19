@@ -14,7 +14,6 @@ if (isset($_POST['word']) and isset($_POST['explanation'])) {
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-    $ip = $_SERVER['REMOTE_ADDR'];
     $query = "INSERT INTO glossar(word, explaination, discord_name, discord_id, added_at) VALUES ('$word','$explanation','69','69',now())";
     if ($conn->query($query) === TRUE) {
         echo json_encode(array("gud" => "yes"));
